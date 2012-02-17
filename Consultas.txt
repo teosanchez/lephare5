@@ -9,6 +9,8 @@ Otro cambio
 -----------------------------------------
 Modificado desde el otrop ordenador
 16/2/2012 14:08
+*********************
+Rafa 11:17
 
 create view vw_edad_paciente_visita as 
 SELECT pacientes.id AS paciente,
