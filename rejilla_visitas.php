@@ -5,7 +5,8 @@ include_once ("clase_bd.php");
 $bd=new bd();
 /*********** Establecer consulta ***************/
 $cadena="";   
-$fecha="";    
+$fecha="";
+$hora="";
 $result="";     
 $result2="";   
 /*********** Paginacion ***************/
@@ -25,7 +26,8 @@ $resultados=$bd->consultar("SELECT * FROM vw_rejilla_visitas");
 $total_registros=mysql_num_rows($resultados);
 $total_paginas=ceil($total_registros / $registros);
 /*********** Fin Paginacion ***************/
-    if(isset ($_GET["fecha"]) && $_GET["fecha"]<>"")
+    
+if(isset ($_GET["fecha"]) && $_GET["fecha"]<>"")
     {
         $fecha=$_GET["fecha"];
         $result=$bd->consultarArray("select * from vw_rejilla_visitas where Fecha='".$fecha."'");

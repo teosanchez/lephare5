@@ -6,6 +6,7 @@ class visitas
     public $id_paciente=null;
     public $id_medico=null;
     public $fecha=null;
+    public $hora=null;
     public $tarifa_consulta=null;
     public $tarifa_diabetes=null;
     public $tarifa_medicamentos=null;
@@ -24,8 +25,9 @@ class visitas
         /*
          * 
          * 
-        */
-        isset($arrayValores['fecha'])?$this->fecha=date("d-m-Y H:i:s",strtotime($arrayValores['fecha'])):$this->fecha=null;
+        */ 
+        isset($arrayValores['fecha'])?$this->fecha=date("d-m-Y",strtotime($arrayValores['fecha'])):$this->fecha=null;
+        isset($arrayValores['hora'])?$this->hora=$arrayValores['hora']:$this->hora=null;
         /*
          * 
          * 
