@@ -1,7 +1,7 @@
 <?php
 include ("clase_rejilla_citas.php");
 include_once ("clase_bd.php");
-<<<<<<< HEAD
+
 $bd = new bd();
 
 /* * ********* Establecer consulta ************** */
@@ -42,7 +42,7 @@ if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
             $result = $bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha asc LIMIT $inicio, $registros");
         }
     }
-=======
+
 include_once ("clase_paginador.php");
 $bd=new bd();
 
@@ -89,7 +89,7 @@ else
                 }
         }   
 	
->>>>>>> 2ac6769e21ed5b3c5eefe59b3c2518ccdaf2fd4b
+
 }
 /* * ****************** Fin establecer consulta **************** */
 ?>
@@ -145,7 +145,7 @@ if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador        
     echo '<p>' . $_GET['msj2'] . '</p>';            //Incluir en Generador
 }                                           //Incluir en Generador
 
-<<<<<<< HEAD
+
 /* * ********* Paginacion ************** */
 if (($pagina - 1) > 0) {
     echo "<a href='index.php?cuerpo=rejilla_citas.php&pagina=" . ($pagina - 1) . "'>< Anterior</a> ";
@@ -161,7 +161,7 @@ if (($pagina + 1) <= $total_paginas) {
     echo " <a href='index.php?cuerpo=rejilla_citas.php&pagina=" . ($pagina + 1) . "'>Siguiente ></a>";
 }
 /* * ********* Fin Paginacion ************** */
-=======
+
 /*********** Paginacion ***************/
 echo '<br/>';
 echo $pages->display_jump_menu();
@@ -173,7 +173,7 @@ if($total_registros==0)
     echo "No se ha encontrado ningun registro.";
     }
  /*********** Fin Paginacion ***************/      
->>>>>>> 2ac6769e21ed5b3c5eefe59b3c2518ccdaf2fd4b
+
 ?>
 
 <div class="nuevo">
