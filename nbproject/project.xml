@@ -3,7 +3,19 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
+<<<<<<< HEAD
             <name>lephare5</name>
+=======
+<<<<<<< HEAD
+            <name>lephare5</name>
+=======
+<<<<<<< HEAD
+            <name>LePhare5</name>
+=======
+            <name>lephare5</name>
+>>>>>>> f0df179469eb5f0525886f36662f04db3ce03a5d
+>>>>>>> 1f82005c4b8b26966a3acdeb91fc5d12f2daa63a
+>>>>>>> e6626cdbda5b351d4fbe2290840486230e4243bc
         </data>
     </configuration>
 </project>
