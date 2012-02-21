@@ -4,4 +4,6 @@
     define ('PASSWORD','');
     define ('BD','lephare5');
     define ('REGISTROS_PAGINA',10);
+    
+    // Jose antonio!!
 ?>
