@@ -4,4 +4,7 @@
     define ('PASSWORD','');
     define ('BD','lephare5');
     define ('REGISTROS_PAGINA',10);
+    
+    // paco: 9:04h
+
 ?>
