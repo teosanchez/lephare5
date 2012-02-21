@@ -62,6 +62,12 @@ if(isset($_GET["id"]))
             <input type="text" name="fecha" id="fecha" value="<?php echo  $visitas->fecha; ?>"/>
             </td>
             </tr>
+            <tr>
+            <td>Hora</td>
+            <td>
+            <input type="text" name="hora" id="hora" value="<?php echo  $visitas->hora; ?>"/>
+            </td>
+            </tr>
         <tr>
             <td>Tarifa de consulta</td>
             <td>

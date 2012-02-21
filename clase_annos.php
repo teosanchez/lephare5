@@ -1,5 +1,6 @@
 <?php
 class annos
+
     {
     //Atributos de la tabla de la bd
     public $anno=null;

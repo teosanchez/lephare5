@@ -1,6 +1,7 @@
 <?php
 include ("clase_rejilla_citas.php");
 include_once ("clase_bd.php");
+<<<<<<< HEAD
 $bd = new bd();
 
 /* * ********* Establecer consulta ************** */
@@ -41,6 +42,54 @@ if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
             $result = $bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha asc LIMIT $inicio, $registros");
         }
     }
+=======
+include_once ("clase_paginador.php");
+$bd=new bd();
+
+/*********** Establecer consulta ***************/
+$cadena="";   
+$fecha="";    
+$result="";     
+$result2="";
+/*********** Paginacion ***************/
+if(!isset($_GET['ipp']))
+{
+    $_GET['ipp']='';
+}
+$resultados=$bd->consultar("SELECT * FROM vw_rejilla_citas");
+$total_registros=mysql_num_rows($resultados);
+$pages= new Paginator;
+$pages->items_total=$total_registros;
+$pages->paginate();
+/*********** Fin Paginacion ***************/
+if(isset ($_GET["fecha"]) && $_GET["fecha"]<>"")
+{	
+$fecha=$_GET["fecha"];
+$result=$bd->consultarArray("select * from vw_rejilla_citas where Fecha='".$fecha."'");
+$result2=$bd->consultar("select * from vw_rejilla_citas where Fecha='".$fecha."'");
+}
+else
+{
+        if(isset ($_GET["cadena"]) && $_GET["cadena"]<>"")
+        {	
+                $cadena=$_GET["cadena"];
+                $result=$bd->consultarArray("SELECT * from vw_rejilla_citas
+                                             where Paciente like '%".$cadena."%' 
+                                             or Medico like '%".$cadena."%'");
+                $result2=$bd->consultar("SELECT * from vw_rejilla_citas
+                                                                            where Paciente like '%".$cadena."%' 
+                                                                            or Medico like '%".$cadena."%'");
+        }    
+        else
+        {
+                if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"]))
+                {	
+                        /*paginacion (ordenado por fecha)*/
+                    $result=$bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha asc $pages->limit");
+                }
+        }   
+	
+>>>>>>> 2ac6769e21ed5b3c5eefe59b3c2518ccdaf2fd4b
 }
 /* * ****************** Fin establecer consulta **************** */
 ?>
@@ -96,6 +145,7 @@ if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador        
     echo '<p>' . $_GET['msj2'] . '</p>';            //Incluir en Generador
 }                                           //Incluir en Generador
 
+<<<<<<< HEAD
 /* * ********* Paginacion ************** */
 if (($pagina - 1) > 0) {
     echo "<a href='index.php?cuerpo=rejilla_citas.php&pagina=" . ($pagina - 1) . "'>< Anterior</a> ";
@@ -111,6 +161,19 @@ if (($pagina + 1) <= $total_paginas) {
     echo " <a href='index.php?cuerpo=rejilla_citas.php&pagina=" . ($pagina + 1) . "'>Siguiente ></a>";
 }
 /* * ********* Fin Paginacion ************** */
+=======
+/*********** Paginacion ***************/
+echo '<br/>';
+echo $pages->display_jump_menu();
+echo '&nbsp;&nbsp;';
+echo $pages->display_items_per_page();
+echo "<p>Pagina: $pages->current_page de $pages->num_pages</p>\n";
+if($total_registros==0)
+    {
+    echo "No se ha encontrado ningun registro.";
+    }
+ /*********** Fin Paginacion ***************/      
+>>>>>>> 2ac6769e21ed5b3c5eefe59b3c2518ccdaf2fd4b
 ?>
 
 <div class="nuevo">
