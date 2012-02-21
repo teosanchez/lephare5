@@ -4,5 +4,13 @@
     define ('PASSWORD','');
     define ('BD','lephare5');
     define ('REGISTROS_PAGINA',10);
+<<<<<<< HEAD
     //modif rafa 09:06 21_02_2012
+=======
+<<<<<<< HEAD
+    //Manuel 9:06
+=======
+    //prueba TEO 9:02
+>>>>>>> bf9decade891f78e2b1e9122dc2e7883f301fc27
+>>>>>>> f0df179469eb5f0525886f36662f04db3ce03a5d
 ?>
