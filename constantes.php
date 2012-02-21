@@ -3,6 +3,5 @@
     define ('USUARIO','root');
     define ('PASSWORD','');
     define ('BD','lephare5');
-    define ('REGISTROS_PAGINA',10);
-
+    define ('REGISTROS_PAGINA',10);    
 ?> 

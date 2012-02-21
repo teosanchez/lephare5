@@ -1,6 +1,7 @@
 <?php
 include ("clase_rejilla_citas.php");
 include_once ("clase_bd.php");
+include_once ("clase_paginador.php");
 $bd=new bd();
 
 /*********** Establecer consulta ***************/
@@ -9,21 +10,15 @@ $fecha="";
 $result="";     
 $result2="";
 /*********** Paginacion ***************/
-$registros=2;
-$inicio=0;
-if(isset($_GET['pagina']))
-    {
-    $pagina=$_GET['pagina'];
-    $inicio=($pagina-1)*$registros;        
-    }
-else 
-    {
-    $pagina=1;
-    }
+if(!isset($_GET['ipp']))
+{
+    $_GET['ipp']='';
+}
 $resultados=$bd->consultar("SELECT * FROM vw_rejilla_citas");
-
 $total_registros=mysql_num_rows($resultados);
-$total_paginas=ceil($total_registros / $registros);
+$pages= new Paginator;
+$pages->items_total=$total_registros;
+$pages->paginate();
 /*********** Fin Paginacion ***************/
 if(isset ($_GET["fecha"]) && $_GET["fecha"]<>"")
 {	
@@ -48,7 +43,7 @@ else
                 if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"]))
                 {	
                         /*paginacion (ordenado por fecha)*/
-                    $result=$bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha asc LIMIT $inicio, $registros");
+                    $result=$bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha asc $pages->limit");
                 }
         }   
 	
@@ -103,25 +98,15 @@ if(isset ($_GET['msj2'])&& $_GET['msj2']!="")//Incluir en Generador
 }                                           //Incluir en Generador
 
 /*********** Paginacion ***************/
-if(($pagina-1) > 0) 
-       {
-       echo "<a href='index.php?cuerpo=rejilla_citas.php&pagina=".($pagina-1)."'>< Anterior</a> ";    
-       }    
-   for ($i=1; $i<=$total_paginas; $i++)
-       {
-       if ($pagina == $i)
-           {    
-           echo "<b>".$pagina."</b> ";
-           }
-        else 
-           {
-           echo "<a href='index.php?cuerpo=rejilla_citas.php&pagina=$i'>$i</a>&nbsp;";
-           } 
-        }   
-   if(($pagina + 1)<=$total_paginas)
-       {
-       echo " <a href='index.php?cuerpo=rejilla_citas.php&pagina=".($pagina+1)."'>Siguiente ></a>";
-       }
+echo '<br/>';
+echo $pages->display_jump_menu();
+echo '&nbsp;&nbsp;';
+echo $pages->display_items_per_page();
+echo "<p>Pagina: $pages->current_page de $pages->num_pages</p>\n";
+if($total_registros==0)
+    {
+    echo "No se ha encontrado ningun registro.";
+    }
  /*********** Fin Paginacion ***************/      
 ?>
 <form action="index.php" method="get">
