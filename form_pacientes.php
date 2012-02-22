@@ -22,7 +22,7 @@ else
     $num_carnet=$resultado+1;    
     }    
 ?>
-<h3><u>FORMULARIO PACIENTE</u><br></h3>
+<h3><u>EDICIÓN PACIENTES</u><br></h3>
 <form name="form_pacientes" method="get" action="procesar_pacientes.php">
     <input type="hidden" name="id" id="id" value="<?php echo $pacientes->id; ?>"/>
     <table>
@@ -82,7 +82,7 @@ else
             </td>
         </tr>
         <tr>
-            <td><input class="boton" type="submit" name="Enviar" value="Enviar"/><?php if(isset ($_GET["id"]) )
+            <td><input class="boton" type="submit" name="Enviar" value="Aceptar"/><?php if(isset ($_GET["id"]) )
                 { echo '<input class="boton" type="submit" name="Borrar" value="Borrar"/>';} ?></td>
             <td><input class="boton" type="submit" name="Cancelar" value="Cancelar"/></td>
         </tr>
