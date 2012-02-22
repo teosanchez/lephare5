@@ -72,3 +72,22 @@ select Enfermedad,
 FROM vw_edad_paciente_num_mes_visita_enfermedad
 JOIN t_meses
 ON vw_edad_paciente_num_mes_visita_enfermedad.Mes = t_meses.cod_mes
+
+*****************21-02-2012***************************************
+
+CREATE OR REPLACE ALGORITHM = UNDEFINED
+DEFINER = `root`@`localhost` 
+SQL SECURITY DEFINER VIEW `lephare5`.`vw_rejilla_visitas` AS 
+SELECT date_format( `lephare5`.`visitas`.`fecha` , _utf8 '%d-%m-%Y' ) AS `fecha` , date_format( `lephare5`.`visitas`.`hora` , _utf8 '%H:%i:%s' ) AS `hora` , concat( `lephare5`.`medicos`.`apellidos` , _latin1 ', ', `lephare5`.`medicos`.`nombre` ) AS `Medico` , concat( `lephare5`.`pacientes`.`apellidos` , _latin1 ', ', `lephare5`.`pacientes`.`nombre` ) AS `Paciente` , `lephare5`.`visitas`.`id` AS `id` 
+FROM (
+(
+`lephare5`.`visitas` 
+JOIN `lephare5`.`pacientes` ON ( (
+`lephare5`.`visitas`.`id_paciente` = `lephare5`.`pacientes`.`id` 
+) ) 
+)
+JOIN `lephare5`.`medicos` ON ( (
+`lephare5`.`visitas`.`id_medico` = `lephare5`.`medicos`.`id` 
+) ) 
+)
+ORDER BY `lephare5`.`visitas`.`fecha` , concat( `lephare5`.`medicos`.`apellidos` , _latin1 ', ', `lephare5`.`medicos`.`nombre` ) , concat( `lephare5`.`pacientes`.`apellidos` , _latin1 ', ', `lephare5`.`pacientes`.`nombre` ) 
