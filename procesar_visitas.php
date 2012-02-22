@@ -12,7 +12,8 @@ if (isset($_GET["Enviar"])) {
         $visitas->id = $_GET["id"];
         $visitas->id_paciente = $_GET["id_paciente"];
         $visitas->id_medico = $_GET["id_medico"];
-        $visitas->fecha = date("Y-m-d H:i:s", strtotime($_GET["fecha"]));
+        $visitas->fecha = date("Y-m-d", strtotime($_GET["fecha"]));
+        $visitas->hora =$_GET["hora"];
         $visitas->tarifa_consulta = $_GET["tarifa_consulta"];
         $visitas->tarifa_diabetes = $_GET["tarifa_diabetes"];
         $visitas->tarifa_medicamentos = $_GET["tarifa_medicamentos"];
