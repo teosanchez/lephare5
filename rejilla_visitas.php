@@ -2,7 +2,6 @@
 include ("clase_rejilla.php");
 include_once ("clase_bd.php");
 
-<<<<<<< HEAD
 $bd = new bd();
 /* * ********* Establecer consulta ************** */
 $cadena = "";
@@ -38,56 +37,47 @@ if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
         if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"])) {
             /* paginacion (ordenado por fecha) */
             $result = $bd->consultarArray("SELECT * FROM vw_rejilla_visitas ORDER BY Fecha asc LIMIT $inicio, $registros");
-=======
-$bd=new bd();
-/*********** Establecer consulta ***************/
-$cadena="";   
-$fecha="";
-$hora="";
-$result="";     
-$result2="";   
-/*********** Paginacion ***************/
-$registros=2;
-$inicio=0;
-if(isset($_GET['pagina']))
-    {
-    $pagina=$_GET['pagina'];
-    $inicio=($pagina-1)*$registros;        
-    }
-else 
-    {
-    $pagina=1;
-    }
-$resultados=$bd->consultar("SELECT * FROM vw_rejilla_visitas");
 
-$total_registros=mysql_num_rows($resultados);
-$total_paginas=ceil($total_registros / $registros);
-/*********** Fin Paginacion ***************/
-    
-if(isset ($_GET["fecha"]) && $_GET["fecha"]<>"")
-    {
-        $fecha=$_GET["fecha"];
-        $result=$bd->consultarArray("select * from vw_rejilla_visitas where Fecha='".$fecha."'");
-        $result2=$bd->consultar("select * from vw_rejilla_visitas where Fecha='".$fecha."'");
-    }    
-    else
-    {
-        if(isset ($_GET["cadena"]) && $_GET["cadena"]<>"")
-        {
-            $cadena=$_GET["cadena"];
-            $result=$bd->consultarArray("SELECT * from vw_rejilla_visitas
-                where Paciente like '%".$cadena."%' or Medico like '%".$cadena."%'");
-            $result2=$bd->consultar("SELECT * from vw_rejilla_visitas
-                where Paciente like '%".$cadena."%' or Medico like '%".$cadena."%'");
-        }
-        else
-        {
-            if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"]))
-            {
-                /*paginacion (ordenado por fecha)*/
-                    $result=$bd->consultarArray("SELECT * FROM vw_rejilla_visitas ORDER BY Fecha asc LIMIT $inicio, $registros");
+            $bd = new bd();
+            /*             * ********* Establecer consulta ************** */
+            $cadena = "";
+            $fecha = "";
+            $hora = "";
+            $result = "";
+            $result2 = "";
+            /*             * ********* Paginacion ************** */
+            $registros = 2;
+            $inicio = 0;
+            if (isset($_GET['pagina'])) {
+                $pagina = $_GET['pagina'];
+                $inicio = ($pagina - 1) * $registros;
+            } else {
+                $pagina = 1;
             }
->>>>>>> 2ac6769e21ed5b3c5eefe59b3c2518ccdaf2fd4b
+            $resultados = $bd->consultar("SELECT * FROM vw_rejilla_visitas");
+
+            $total_registros = mysql_num_rows($resultados);
+            $total_paginas = ceil($total_registros / $registros);
+            /*             * ********* Fin Paginacion ************** */
+
+            if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
+                $fecha = $_GET["fecha"];
+                $result = $bd->consultarArray("select * from vw_rejilla_visitas where Fecha='" . $fecha . "'");
+                $result2 = $bd->consultar("select * from vw_rejilla_visitas where Fecha='" . $fecha . "'");
+            } else {
+                if (isset($_GET["cadena"]) && $_GET["cadena"] <> "") {
+                    $cadena = $_GET["cadena"];
+                    $result = $bd->consultarArray("SELECT * from vw_rejilla_visitas
+                where Paciente like '%" . $cadena . "%' or Medico like '%" . $cadena . "%'");
+                    $result2 = $bd->consultar("SELECT * from vw_rejilla_visitas
+                where Paciente like '%" . $cadena . "%' or Medico like '%" . $cadena . "%'");
+                } else {
+                    if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"])) {
+                        /* paginacion (ordenado por fecha) */
+                        $result = $bd->consultarArray("SELECT * FROM vw_rejilla_visitas ORDER BY Fecha asc LIMIT $inicio, $registros");
+                    }
+                }
+            }
         }
     }
 }

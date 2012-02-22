@@ -42,54 +42,44 @@ if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
             $result = $bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha asc LIMIT $inicio, $registros");
         }
     }
-
+}
 include_once ("clase_paginador.php");
-$bd=new bd();
+$bd = new bd();
 
-/*********** Establecer consulta ***************/
-$cadena="";   
-$fecha="";    
-$result="";     
-$result2="";
-/*********** Paginacion ***************/
-if(!isset($_GET['ipp']))
-{
-    $_GET['ipp']='';
+/* * ********* Establecer consulta ************** */
+$cadena = "";
+$fecha = "";
+$result = "";
+$result2 = "";
+/* * ********* Paginacion ************** */
+if (!isset($_GET['ipp'])) {
+    $_GET['ipp'] = '';
 }
-$resultados=$bd->consultar("SELECT * FROM vw_rejilla_citas");
-$total_registros=mysql_num_rows($resultados);
-$pages= new Paginator;
-$pages->items_total=$total_registros;
+$resultados = $bd->consultar("SELECT * FROM vw_rejilla_citas");
+$total_registros = mysql_num_rows($resultados);
+$pages = new Paginator;
+$pages->items_total = $total_registros;
 $pages->paginate();
-/*********** Fin Paginacion ***************/
-if(isset ($_GET["fecha"]) && $_GET["fecha"]<>"")
-{	
-$fecha=$_GET["fecha"];
-$result=$bd->consultarArray("select * from vw_rejilla_citas where Fecha='".$fecha."'");
-$result2=$bd->consultar("select * from vw_rejilla_citas where Fecha='".$fecha."'");
-}
-else
-{
-        if(isset ($_GET["cadena"]) && $_GET["cadena"]<>"")
-        {	
-                $cadena=$_GET["cadena"];
-                $result=$bd->consultarArray("SELECT * from vw_rejilla_citas
-                                             where Paciente like '%".$cadena."%' 
-                                             or Medico like '%".$cadena."%'");
-                $result2=$bd->consultar("SELECT * from vw_rejilla_citas
-                                                                            where Paciente like '%".$cadena."%' 
-                                                                            or Medico like '%".$cadena."%'");
-        }    
-        else
-        {
-                if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"]))
-                {	
-                        /*paginacion (ordenado por fecha)*/
-                    $result=$bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha asc $pages->limit");
-                }
-        }   
-	
-
+/* * ********* Fin Paginacion ************** */
+if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
+    $fecha = $_GET["fecha"];
+    $result = $bd->consultarArray("select * from vw_rejilla_citas where Fecha='" . $fecha . "'");
+    $result2 = $bd->consultar("select * from vw_rejilla_citas where Fecha='" . $fecha . "'");
+} else {
+    if (isset($_GET["cadena"]) && $_GET["cadena"] <> "") {
+        $cadena = $_GET["cadena"];
+        $result = $bd->consultarArray("SELECT * from vw_rejilla_citas
+                                             where Paciente like '%" . $cadena . "%' 
+                                             or Medico like '%" . $cadena . "%'");
+        $result2 = $bd->consultar("SELECT * from vw_rejilla_citas
+                                                                            where Paciente like '%" . $cadena . "%' 
+                                                                            or Medico like '%" . $cadena . "%'");
+    } else {
+        if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"])) {
+            /* paginacion (ordenado por fecha) */
+            $result = $bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha asc $pages->limit");
+        }
+    }
 }
 /* * ****************** Fin establecer consulta **************** */
 ?>
@@ -162,24 +152,22 @@ if (($pagina + 1) <= $total_paginas) {
 }
 /* * ********* Fin Paginacion ************** */
 
-/*********** Paginacion ***************/
+/* * ********* Paginacion ************** */
 echo '<br/>';
 echo $pages->display_jump_menu();
 echo '&nbsp;&nbsp;';
 echo $pages->display_items_per_page();
 echo "<p>Pagina: $pages->current_page de $pages->num_pages</p>\n";
-if($total_registros==0)
-    {
+if ($total_registros == 0) {
     echo "No se ha encontrado ningun registro.";
-    }
- /*********** Fin Paginacion ***************/      
-
+}
+/* * ********* Fin Paginacion ************** */
 ?>
 
 <div class="nuevo">
     <form action="index.php" method="get">
         <input type="hidden" name="cuerpo" value="form_citas.php" />
-        <br/><input class="boton" type="submit" name="nuevo" value="Nuevo"/>
+        <input class="boton" type="submit" name="nuevo" value="Nuevo"/>
     </form>
 </div>
 
