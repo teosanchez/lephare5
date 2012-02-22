@@ -2,7 +2,7 @@
 include ("clase_rejilla.php");
 include_once ("clase_bd.php");
 
-<<<<<<< HEAD
+
 $bd = new bd();
 /* * ********* Establecer consulta ************** */
 $cadena = "";
@@ -38,7 +38,7 @@ if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
         if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"])) {
             /* paginacion (ordenado por fecha) */
             $result = $bd->consultarArray("SELECT * FROM vw_rejilla_visitas ORDER BY Fecha asc LIMIT $inicio, $registros");
-=======
+
 $bd=new bd();
 /*********** Establecer consulta ***************/
 $cadena="";   
@@ -87,7 +87,7 @@ if(isset ($_GET["fecha"]) && $_GET["fecha"]<>"")
                 /*paginacion (ordenado por fecha)*/
                     $result=$bd->consultarArray("SELECT * FROM vw_rejilla_visitas ORDER BY Fecha asc LIMIT $inicio, $registros");
             }
->>>>>>> 2ac6769e21ed5b3c5eefe59b3c2518ccdaf2fd4b
+
         }
     }
 }
