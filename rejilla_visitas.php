@@ -51,7 +51,7 @@ if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
             $hora = "";
             $result = "";
             $result2 = "";
-            /*             * ********* Paginacion ************** */
+            /*             * ********* Paginacion ************** 
             $registros = 2;
             $inicio = 0;
             if (isset($_GET['pagina'])) {
