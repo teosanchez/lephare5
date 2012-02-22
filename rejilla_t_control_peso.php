@@ -10,7 +10,7 @@ $result2 = $result_paciente[0];
 $paciente = $result2['Paciente'];
 
 /* * ********* Paginacion ************** */
-$registros = PAGINACION;
+$registros = REGISTROS_PAGINA;
 $inicio = 0;
 if (isset($_GET['pagina'])) {
     $pagina = $_GET['pagina'];

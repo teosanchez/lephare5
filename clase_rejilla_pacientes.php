@@ -19,7 +19,7 @@ class rejilla_pacientes
 
         foreach($datos[0] as $indice=>$valor)
         {
-            if ($indice<>"id_paciente")          /* Incluir en generador */
+            if ($indice<>"id" && $indice<>"id_paciente")          /* Incluir en generador */
             {                           /* Incluir en generador */
 		$salida.="<th>".$indice."</th>";
             } 
@@ -52,7 +52,7 @@ class rejilla_pacientes
             $salida.="<tr>";
             foreach($fila as $indice=>$valor)
             {
-                if ($indice<>"id_paciente")              /* Incluir en generador */
+                if ($indice<>"id" && $indice<>"id_paciente")              /* Incluir en generador */
                 {                           /* Incluir en generador */
                     $clave=$fila[$this->_campoClave];
                     $salida.="<td>".$this->enlazar($indice,$valor,$clave)."</td>";
