@@ -1,52 +1,64 @@
 <?php
 include ("clase_rejilla_historial.php");
 include_once ("clase_bd.php");
+include_once ("clase_paginador.php");
 
 $bd=new bd();
-
 /*********** Paginacion ***************/
-$registros=2;
-$inicio=0;
-if(isset($_GET['pagina']))
+if(!isset($_GET['ipp']))
     {
-    $pagina=$_GET['pagina'];
-    $inicio=($pagina-1)*$registros;        
+    $_GET['ipp']='';
     }
-else 
-    {
-    $pagina=1;
-    }
-$resultados=$bd->consultar("SELECT * FROM vw_rejilla_historial");
-
-$total_registros=mysql_num_rows($resultados);
-$total_paginas=ceil($total_registros / $registros);
+$result2=$bd->consultarArray("SELECT * FROM vw_rejilla_historial");
+$num_registros=count($result2);
+$pages= new Paginator;
+$pages->items_total=$num_registros;
+$pages->paginate();
 /*********** Fin Paginacion ***************/
 
 if(isset ($_GET["id_paciente"]))
     {
-        $id_paciente=$_GET["id_paciente"];
-        $result=$bd->consultarArray("select * from vw_rejilla_historial where id_paciente='".$id_paciente."'");
-        $result2=$bd->consultar("select * from vw_rejilla_historial where id_paciente='".$id_paciente."'");
+    $id_paciente=$_GET["id_paciente"];
+    $result=$bd->consultarArray("select * from vw_rejilla_historial where id_paciente='".$id_paciente."'
+                                $pages->limit");
+    $result2=$bd->consultarArray("select * from vw_rejilla_historial where id_paciente='".$id_paciente."'");
+    $num_registros=count($result2); 
+    $pages->items_total=$num_registros;
+    $pages->paginate();
     }    
 //-----------------Comienzo Rejilla--------------------------
-    echo '<h3>REJILLA HISTORIAL</h3><br/>';
-    echo "<h3>Historial de ".$_GET['nombre_paciente']."</h3><br/>";
+echo '<div class="titulo"><h3>HISTORIAL</h3></div>';
+echo '<div class="titulo"><h3>Historial de '.$_GET['nombre_paciente']."</h3></div>";
 
 if($result)
-{    
+    {    
     $rejilla=new rejilla($result,"index.php?cuerpo=form_visitas.php&","id","Fecha");
     echo $rejilla->pintar();      
-        if ($result2<>"")       /* Incluir  en generador este if */
-    {
-        $num_registros= mysql_num_rows($result2);
+    if ($result2<>"")       /* Incluir  en generador este if */
+        {        
         if ($num_registros == 1)
-        {
-            echo '<p>Se ha encontrado '.$num_registros.' registro.</p>';
-        }
+            {
+            echo '<br/>Se ha encontrado '.$num_registros.' registro.';
+            }
         else
-        {
-            echo '<p>Se han encontrado '.$num_registros.' registros.</p>';
+            {
+            echo '<br/>Se han encontrado '.$num_registros.' registros.';
+            }
         }
     }
-}
+ /*********** Paginacion ***************/
+if($num_registros>10)
+    {
+    echo '&nbsp;&nbsp;';
+    echo $pages->display_jump_menu();
+    echo '&nbsp;&nbsp;';
+    echo $pages->display_items_per_page();
+    echo '&nbsp;&nbsp;';
+    echo "Pagina: $pages->current_page de $pages->num_pages";
+    }
+if($num_registros==0)
+    {
+    echo "No se ha encontrado ningun registro.";
+    }   
+ /*********** Fin Paginacion ***************/   
 ?>
