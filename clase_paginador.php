@@ -66,7 +66,7 @@ class Paginator
         {
         $items = '';                
         foreach($this->ipp_array as $ipp_opt) $items .= ($ipp_opt == $this->items_per_page)? "<option selected value=\"$ipp_opt\">$ipp_opt</option>\n":"<option value=\"$ipp_opt\">$ipp_opt</option>\n";
-        return "<span>Nº de Registros por pagina: </span><select onchange=\"window.location='$_SERVER[PHP_SELF]?page=1&ipp='+this[this.selectedIndex].value+'$this->querystring';return false\">$items</select>\n";
+        return "<span>Nº de registros por pagina: </span><select onchange=\"window.location='$_SERVER[PHP_SELF]?page=1&ipp='+this[this.selectedIndex].value+'$this->querystring';return false\">$items</select>\n";
         }
         
     function display_jump_menu()

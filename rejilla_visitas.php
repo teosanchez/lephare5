@@ -2,6 +2,7 @@
 include ("clase_rejilla.php");
 include_once ("clase_bd.php");
 
+<<<<<<< HEAD
 
 $bd = new bd();
 /* * ********* Establecer consulta ************** */
@@ -39,6 +40,8 @@ if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
             /* paginacion (ordenado por fecha) */
             $result = $bd->consultarArray("SELECT * FROM vw_rejilla_visitas ORDER BY Fecha asc LIMIT $inicio, $registros");
 
+=======
+>>>>>>> 41728393dd4eee362288799c4f9aa7afd2570df7
 $bd=new bd();
 /*********** Establecer consulta ***************/
 $cadena="";   
@@ -87,10 +90,12 @@ if(isset ($_GET["fecha"]) && $_GET["fecha"]<>"")
                 /*paginacion (ordenado por fecha)*/
                     $result=$bd->consultarArray("SELECT * FROM vw_rejilla_visitas ORDER BY Fecha asc LIMIT $inicio, $registros");
             }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 41728393dd4eee362288799c4f9aa7afd2570df7
         }
     }
-}
 /* * ****************** Fin establecer consulta **************** */
 ?>
 <div class="titulo">
@@ -163,4 +168,3 @@ if (($pagina + 1) <= $total_paginas) {
         <input class="boton" type="submit" name="nuevo" value="Nuevo"/>
     </form>
 </div>
-
