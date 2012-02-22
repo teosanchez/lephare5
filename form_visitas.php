@@ -28,7 +28,7 @@ if(isset($_GET["id"]))
         }
      }   
 ?>
-<h3><u>FORMULARIO VISITAS</u><br></h3>
+<h3><u>EDICIÓN VISITAS</u><br></h3>
 <form name="form_visitas" method="get" action="procesar_visitas.php">
     <input type="hidden" name="id" id="id" value="<?php echo $visitas->id; ?>"/>
     <?php
@@ -42,16 +42,17 @@ if(isset($_GET["id"]))
             <td>Paciente</td>
             <td>
             <?php
-                $datosLista=$bd->consultar("select concat(pacientes.apellidos,',  ',pacientes.nombre) AS Paciente,id from pacientes");
+                $datosLista=$bd->consultar(      "select substr(concat(pacientes.apellidos,', ',pacientes.nombre),1,40) AS Paciente,
+                    id from pacientes");
                 echo $util->pinta_selection($datosLista,"id_paciente","Paciente",$visitas->id_paciente);
             ?>
             </td>
         </tr>
         <tr>
-            <td>Medico</td>
+            <td>Médico</td>
             <td>
             <?php
-               $datosLista=$bd->consultar("select concat(medicos.apellidos,',  ',medicos.nombre) AS Medico,id from medicos");
+               $datosLista=$bd->consultar("select substr(concat(medicos.apellidos,', ',medicos.nombre),1,40) AS Medico,id from medicos");
                echo $util->pinta_selection($datosLista,"id_medico","Medico",$visitas->id_medico);
             ?>
             </td>
@@ -63,33 +64,35 @@ if(isset($_GET["id"]))
             </td>
             </tr>
         <tr>
-            <td>Tarifa de consulta</td>
+            <td>Tarifa de Consulta</td>
             <td>
-            <input type="text" name="tarifa_consulta" id="tarifa_consulta" value="<?php echo  $visitas->tarifa_consulta; ?>"/>
+            <input type="text" name="tarifa_consulta" id="tarifa_consulta" value="<?php echo  number_format($visitas->tarifa_consulta,2); ?>"/>
             </td>
         </tr>
         <tr>
-            <td>Tarifa de diabetes</td>
+            <td>Tarifa de Diabetes</td>
             <td>
-            <input type="text" name="tarifa_diabetes" id="tarifa_diabetes" value="<?php echo  $visitas->tarifa_diabetes; ?>"/>
+            <input type="text" name="tarifa_diabetes" id="tarifa_diabetes" value="<?php echo  number_format($visitas->tarifa_diabetes,2); ?>"/>
             </td>
         </tr>
         <tr>
-            <td>Tarifa de medicamentos</td>
+            <td>Tarifa de Medicamentos</td>
             <td>
-            <input type="text" name="tarifa_medicamentos" id="tarifa_medicamentos" value="<?php echo  $visitas->tarifa_medicamentos; ?>"/>
+            <input type="text" name="tarifa_medicamentos" id="tarifa_medicamentos" value="<?php echo  number_format($visitas->tarifa_medicamentos,2); ?>"/>
             </td>
         </tr>
         <tr>
-            <td>Diagnostico</td>
+            <td>Diagnóstico</td>
             <td>
-            <input type="text" name="diagnostico" id="diagnostico" value="<?php echo  $visitas->diagnostico; ?>"/>
+            <textarea cols="42" rows="4" name="diagnostico" id="diagnostico" value=""/><?php echo  $visitas->diagnostico; ?>
+            </textarea>
             </td>
         </tr>
         <tr>
             <td>Medicamentos</td>
             <td>
-            <input type="text" name="medicamentos" id="medicamentos" value="<?php echo  $visitas->medicamentos; ?>"/>
+            <textarea cols="42" rows="4" name="medicamentos" id="medicamentos" value=""/><?php echo  $visitas->medicamentos; ?>
+            </textarea>
             </td>
         </tr>
         <tr>
