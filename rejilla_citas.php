@@ -78,14 +78,11 @@ else	/* Incluir en generador este else */
         echo '<p class="error">Introduzca una fecha.</p>';
         $num_registros='';
         }
-    else
+    if (isset($_GET["buscar_cadena"]) && $cadena=="")
         {
-        if (isset($_GET["buscar_cadena"]) && $cadena=="")
-            {
-            echo '<p class="error">Introduzca el dato que desea buscar.</p>';
-            $num_registros='';
-            }
-        }
+        echo '<p class="error">Introduzca el dato que desea buscar.</p>';
+        $num_registros='';
+        }       
     }    
 if(isset ($_GET['msj'])&& $_GET['msj']!="")
     {
