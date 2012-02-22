@@ -37,8 +37,8 @@ if(isset ($_GET["buscar"]) or isset ($_GET["todos"])  )
 else 
     {
     echo '<form action="index.php" method="get">
-        <br/>Buscar Visita
-        <input type="text" name="id_visita"/>
+        <label for="id_visita">Buscar Visita</label> 
+        <input type="text" id="id_visita" name="id_visita"/>
         <input type="hidden" name="cuerpo" value="rejilla_visita_enfermedad.php" />
         <input class="boton" type="submit" name="buscar" value="Buscar"/>
         </form>

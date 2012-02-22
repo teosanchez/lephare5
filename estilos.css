@@ -70,7 +70,7 @@ table{
     border-collapse:collapse;
     border:1px black;
 }
-tr:nth-child(2n+1){background-color:#F0F0F0; color:#353535;}        
+tr:nth-child(2n+1){background-color:#F0F0F0; color:#000;}        
 th {
     font-size: 14px;
     font-weight:bold;
@@ -99,7 +99,7 @@ input,select{
     background-color:#F0F0F0;
     color:#353535;
 }
-/* Botones */    
+/* Botones    
 .boton {
     background-color:silver;
     font-family: arial, verdana;
@@ -109,7 +109,7 @@ input,select{
     border:solid black 1px;
     
 }
-
+*/ 
 /* Pie de Pagina */
 #contenedor3 {
     
@@ -136,3 +136,5 @@ input,select{
 
 #botonera{
     padding-left: auto; }
+
+
