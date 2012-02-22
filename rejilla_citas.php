@@ -7,46 +7,48 @@ $bd=new bd();
 /*********** Establecer consulta ***************/
 $cadena="";   
 $fecha="";    
-$result="";     
-$result2="";
+$result="";
 /*********** Paginacion ***************/
 if(!isset($_GET['ipp']))
-{
+    {
     $_GET['ipp']='';
-}
-$resultados=$bd->consultar("SELECT * FROM vw_rejilla_citas");
-$total_registros=mysql_num_rows($resultados);
+    }
+$result2=$bd->consultarArray("SELECT * FROM vw_rejilla_citas");
+$num_registros=count($result2);
 $pages= new Paginator;
-$pages->items_total=$total_registros;
+$pages->items_total=$num_registros;
 $pages->paginate();
 /*********** Fin Paginacion ***************/
 if(isset ($_GET["fecha"]) && $_GET["fecha"]<>"")
-{	
-$fecha=$_GET["fecha"];
-$result=$bd->consultarArray("select * from vw_rejilla_citas where Fecha='".$fecha."'");
-$result2=$bd->consultar("select * from vw_rejilla_citas where Fecha='".$fecha."'");
-}
+    {	
+    $fecha=$_GET["fecha"];
+    $result=$bd->consultarArray("select * from vw_rejilla_citas where Fecha='".$fecha."' $pages->limit");
+    $result2=$bd->consultarArray("select * from vw_rejilla_citas where Fecha='".$fecha."'");  
+    $num_registros=count($result2); 
+    $pages->items_total=$num_registros;
+    $pages->paginate();
+    }
 else
 {
-        if(isset ($_GET["cadena"]) && $_GET["cadena"]<>"")
+if(isset ($_GET["cadena"]) && $_GET["cadena"]<>"")
+    {	
+    $cadena=$_GET["cadena"];
+    $result=$bd->consultarArray("SELECT * from vw_rejilla_citas where Paciente like '%".$cadena."%' 
+                                or Medico like '%".$cadena."%'ORDER BY Fecha desc $pages->limit");
+    $result2=$bd->consultarArray("SELECT * from vw_rejilla_citas where Paciente like '%".$cadena."%' 
+                                or Medico like '%".$cadena."%'");
+    $num_registros=count($result2);
+    $pages->items_total=$num_registros;
+    $pages->paginate();
+    }    
+else
+    {
+    if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"]))
         {	
-                $cadena=$_GET["cadena"];
-                $result=$bd->consultarArray("SELECT * from vw_rejilla_citas
-                                             where Paciente like '%".$cadena."%' 
-                                             or Medico like '%".$cadena."%'");
-                $result2=$bd->consultar("SELECT * from vw_rejilla_citas
-                                                                            where Paciente like '%".$cadena."%' 
-                                                                            or Medico like '%".$cadena."%'");
-        }    
-        else
-        {
-                if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"]))
-                {	
-                        /*paginacion (ordenado por fecha)*/
-                    $result=$bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha asc $pages->limit");
-                }
-        }   
-	
+        /*paginacion (ordenado por fecha)*/
+        $result=$bd->consultarArray("SELECT * FROM vw_rejilla_citas ORDER BY Fecha desc $pages->limit");
+        }
+    }	
 }
 /******************** Fin establecer consulta *****************/
 
@@ -57,71 +59,72 @@ if($result)
     $rejilla=new rejilla_citas($result,"index.php?cuerpo=form_citas.php&","id","Paciente");
     echo $rejilla->pintar();
     if ($result2<>"")       /* Incluir  en generador este if */
-    {
-        $num_registros= mysql_num_rows($result2);
+        {
+        //$num_registros= mysql_num_rows($result2);
         if ($num_registros == 1)
-        {
-            echo '<p>Se ha encontrado '.$num_registros.' registro.</p>';
-        }
+            {
+                echo '<br/>Se ha encontrado '.$num_registros.' registro.';
+            }
         else
-        {
-            echo '<p>Se han encontrado '.$num_registros.' registros.</p>';
+            {
+                echo '<br/>Se han encontrado '.$num_registros.' registros.';
+            }
         }
     }
-}
 else	/* Incluir en generador este else */
-{
+    {
     if (isset($_GET["buscar_fecha"]) && $fecha=="")
-    {
+        {
         echo '<p class="error">Introduzca una fecha.</p>';
-    }
+        $num_registros='';
+        }
     else
-    {
+        {
         if (isset($_GET["buscar_cadena"]) && $cadena=="")
-        {
+            {
             echo '<p class="error">Introduzca el dato que desea buscar.</p>';
+            $num_registros='';
+            }
         }
-        else
-        {
-            echo '<p class="error">No se ha encontrado ningún registro.</p>';
-        }
-    }
-}
-    
+    }    
 if(isset ($_GET['msj'])&& $_GET['msj']!="")
-{
+    {
     echo '<p>Error: '.$_GET['msj'].'</p>';
-}
+    }
 if(isset ($_GET['msj2'])&& $_GET['msj2']!="")//Incluir en Generador
-{                                           //Incluir en Generador
+    {                                           //Incluir en Generador
     echo '<p>'.$_GET['msj2'].'</p>';            //Incluir en Generador
-}                                           //Incluir en Generador
+    }                                           //Incluir en Generador
 
 /*********** Paginacion ***************/
-echo '<br/>';
-echo $pages->display_jump_menu();
-echo '&nbsp;&nbsp;';
-echo $pages->display_items_per_page();
-echo "<p>Pagina: $pages->current_page de $pages->num_pages</p>\n";
-if($total_registros==0)
+if($num_registros>10)
+    {
+    echo '&nbsp;&nbsp;';
+    echo $pages->display_jump_menu();
+    echo '&nbsp;&nbsp;';
+    echo $pages->display_items_per_page();
+    echo '&nbsp;&nbsp;';
+    echo "Pagina: $pages->current_page de $pages->num_pages";
+    }
+if($num_registros==0)
     {
     echo "No se ha encontrado ningun registro.";
-    }
+    }   
  /*********** Fin Paginacion ***************/      
 ?>
 <form action="index.php" method="get">
-	<input type="hidden" name="cuerpo" value="form_citas.php" />
-	<br/><input class="boton" type="submit" name="nuevo" value="Nueva Cita"/>
+    <input type="hidden" name="cuerpo" value="form_citas.php" />
+    <br/><input class="boton" type="submit" name="nuevo" value="Nueva Cita"/>
 </form>
 
 <form action="index.php" method="get">
     <input type="hidden" name="cuerpo" value="rejilla_citas.php" />
-	<input type="text" name="fecha"/>
-	<input class="boton" type="submit" name="buscar_fecha" value="Buscar Fecha"/>
+    <input type="text" name="fecha"/>
+    <input class="boton" type="submit" name="buscar_fecha" value="Buscar Fecha"/>
 </form>
 
 <form action="index.php" method="get">
-	<input type="hidden" name="cuerpo" value="rejilla_citas.php" />
-	<input type="text" name="cadena"/>
-	<input class="boton" type="submit" name="buscar_cadena" value="Buscar Dato"/>
+    <input type="hidden" name="cuerpo" value="rejilla_citas.php" />
+    <input type="text" name="cadena"/>
+    <input class="boton" type="submit" name="buscar_cadena" value="Buscar Dato"/>
 </form>
