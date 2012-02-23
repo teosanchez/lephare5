@@ -54,7 +54,7 @@ else
 <?php
 if($result)
     {
-    $rejilla=new rejilla($result,"index.php?cuerpo=form_t_enfermedades.php&","id","Paciente");
+    $rejilla=new rejilla($result,"index.php?cuerpo=form_t_enfermedades.php&","id","Enfermedad");
     echo $rejilla->pintar();
     if ($result2<>"")       /* Incluir  en generador este if */
         {
