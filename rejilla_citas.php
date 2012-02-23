@@ -37,7 +37,7 @@ if (isset($_GET["fecha"]) && $_GET["fecha"] <> "") {
                                 or Medico like '%" . $cadena . "%'");
         $num_registros = count($result2);
         $pages->items_total = $num_registros;
-        $pages->paginate();
+        $pages->paginate();        
     } else {
         if (!isset($_GET["buscar_fecha"]) and !isset($_GET["buscar_cadena"])) {
             /* paginacion (ordenado por fecha) */
@@ -66,22 +66,31 @@ echo '<div class="titulo"><h3>CITAS</h3></div>';
 <?php
 if ($result) {
     $rejilla = new rejilla_citas($result, "index.php?cuerpo=form_citas.php&", "id", "Paciente");
-    echo $rejilla->pintar();   
-}else {
- if (isset($_GET["buscar_fecha"]) && $fecha == "") {
-    echo '<p class="error">Introduzca una fecha.</p>';
-    $num_registros = '';
-}
-if (isset($_GET["buscar_cadena"]) && $cadena == "") {
-    echo '<p class="error">Introduzca el dato que desea buscar.</p>';
-    $num_registros = '';
-}
-} 
+    echo $rejilla->pintar();
+    if ($result2<>"")       /* Incluir  en generador este if */
+        {        
+        if ($num_registros == 1) {
+            echo '<p class="num_registros">Se ha encontrado ' . $num_registros . ' registro.</p>';
+        } else {
+            echo '<p class="num_registros">Se han encontrado ' . $num_registros . ' registros.</p>';
+        }
+        }
+    }else{
+     if (isset($_GET["buscar_fecha"]) && $fecha == "") {
+        echo '<p class="error">Introduzca una fecha.</p>';
+        $num_registros = '';
+    } else {
+        if (isset($_GET["buscar_cadena"]) && $cadena == "") {
+            echo '<p class="error">Introduzca el dato que desea buscar.</p>';
+            $num_registros = '';
+        }
+    }
+ }
 if (isset($_GET['msj']) && $_GET['msj'] != "") {
-    echo '<p>Error: ' . $_GET['msj'] . '</p>';
+    echo '<p class="error">Error: ' . $_GET['msj'] . '</p>';
 }
-if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador                                           //Incluir en Generador
-    echo '<p>' . $_GET['msj2'] . '</p>';            //Incluir en Generador
+if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador                                           
+    echo '<p clase="mensaje">' . $_GET['msj2'] . '</p>';            //Incluir en Generador
 }                                         //Incluir en Generador
 ?>
 
@@ -93,14 +102,6 @@ if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador        
 </div>
 
 <?php
- if ($result2 <> "") /* Incluir  en generador este if */ {
-        //$num_registros= mysql_num_rows($result2);
-        if ($num_registros == 1) {
-            echo '<p class="num_registros">Se ha encontrado ' . $num_registros . ' registro.</p>';
-        } else {
-            echo '<p class="num_registros">Se han encontrado ' . $num_registros . ' registros.</p>';
-        }
-    } 
 /* * ********* Paginacion ************** */
 if ($num_registros > 10) {    
     echo '&nbsp;&nbsp;';
@@ -111,8 +112,18 @@ if ($num_registros > 10) {
     echo "Pagina: $pages->current_page de $pages->num_pages";
     echo '<br/><br/>';
 }
-if ($num_registros == 0) {
-    echo "No se ha encontrado ningun registro.";
-}
+if($num_registros==0)
+    {
+    echo "<p clase='mensaje'>No se ha encontrado ningun registro.</p>";
+    } 
 /* * ********* Fin Paginacion ************** */
+if(isset($_GET["buscar_fecha"]) or isset($_GET["buscar_cadena"]))
+    {
+    echo '<div class="cancelar">
+            <form action="index.php" method="get">
+                <input type="hidden" name="cuerpo" value="rejilla_citas.php" />
+                <input class="boton" type="submit" name="Cancelar" value="Cancelar"/>
+            </form>
+        </div>';
+    }
 ?>

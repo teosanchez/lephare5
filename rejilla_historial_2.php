@@ -36,14 +36,11 @@ if($result)
     echo $rejilla->pintar();      
     if ($result2<>"")       /* Incluir  en generador este if */
         {        
-        if ($num_registros == 1)
-            {
-            echo '<br/>Se ha encontrado '.$num_registros.' registro.';
-            }
-        else
-            {
-            echo '<br/>Se han encontrado '.$num_registros.' registros.';
-            }
+        if ($num_registros == 1) {
+            echo '<p class="num_registros">Se ha encontrado ' . $num_registros . ' registro.</p>';
+        } else {
+            echo '<p class="num_registros">Se han encontrado ' . $num_registros . ' registros.</p>';
+        }
         }
     }
  /*********** Paginacion ***************/
@@ -58,7 +55,13 @@ if($num_registros>10)
     }
 if($num_registros==0)
     {
-    echo "No se ha encontrado ningun registro.";
+    echo "<p clase='mensaje'>No se ha encontrado ningun registro.</p>";
     }   
  /*********** Fin Paginacion ***************/   
 ?>
+<div class="cancelar">
+    <form action="index.php" method="get">
+		<input type="hidden" name="cuerpo" value="rejilla_pacientes.php" />
+		<input class="boton" type="submit" name="Cancelar" value="Cancelar"/>
+    </form>
+</div>

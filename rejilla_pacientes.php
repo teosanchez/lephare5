@@ -53,22 +53,37 @@ else
     }
 /******************** Fin establecer consulta *****************/
 
-echo '<h3>REJILLA PACIENTES</h3><br/>';
+echo '<div class="titulo"><h3>PACIENTES</h3></div>';
+?>
 
+<div class="buscar">
+    <form action="index.php" method="get">
+        <input type="text" name="cadena"/>
+        <input type="hidden" name="cuerpo" value="rejilla_pacientes.php" />
+        <input class="boton" type="submit" name="buscar_cadena" value="Buscar Datos"/>
+    </form>
+</div>    
+
+<div class="buscar_carnet">
+    <form action="index.php" method="get">
+        <input type="text" name="carnet"/>
+        <input type="hidden" name="cuerpo" value="rejilla_pacientes.php" />
+        <input class="boton" type="submit" name="buscar_carnet" value="Buscar Carnet"/>
+    </form>
+</div>    
+
+<?php
 if($result)
     {
     $rejilla=new rejilla_pacientes($result,"index.php?cuerpo=form_pacientes.php&","id","Paciente");
     echo $rejilla->pintar();
     if ($result2<>"")       /* Incluir  en generador este if */
         {
-        if ($num_registros == 1)
-            {
-            echo '<br/>Se ha encontrado '.$num_registros.' registro.';
-            }
-        else
-            {
-            echo '<br/>Se han encontrado '.$num_registros.' registros.';
-            }
+        if ($num_registros == 1) {
+            echo '<p class="num_registros">Se ha encontrado ' . $num_registros . ' registro.</p>';
+        } else {
+            echo '<p class="num_registros">Se han encontrado ' . $num_registros . ' registros.</p>';
+        }
         }
     }
 else	/* Incluir en generador este else */
@@ -87,14 +102,22 @@ else	/* Incluir en generador este else */
             }       
         }
     }
-if(isset ($_GET['msj'])&& $_GET['msj']!="")
-    {
-    echo '<p>Error: '.$_GET['msj'].'</p>';
-    }
-if(isset ($_GET['msj2'])&& $_GET['msj2']!="")//Incluir en Generador
-    {                                           //Incluir en Generador
-    echo '<p>'.$_GET['msj2'].'</p>';            //Incluir en Generador
-    }                                         //Incluir en Generador 
+if (isset($_GET['msj']) && $_GET['msj'] != "") {
+    echo '<p class="error">Error: ' . $_GET['msj'] . '</p>';
+}
+if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador                                           
+    echo '<p clase="mensaje">' . $_GET['msj2'] . '</p>';            //Incluir en Generador
+}  
+?>
+    
+<div class="nuevo">
+    <form action="index.php" method="get">
+    <input type="hidden" name="cuerpo" value="form_pacientes.php" />
+    <input class="boton" type="submit" name="nuevo" value="Nuevo"/>
+    </form>
+</div>
+    
+<?php    
 /*********** Paginacion ***************/
 if($num_registros>10)
     {
@@ -107,33 +130,16 @@ if($num_registros>10)
     }
 if($num_registros==0)
     {
-    echo "No se ha encontrado ningun registro.";
+    echo "<p clase='mensaje'>No se ha encontrado ningun registro.</p>";
     }   
 /*********** Fin Paginacion ***************/    
-if(isset ($_GET["buscar"]) or isset ($_GET["todos"]) or isset ($_GET["buscar_carnet"]))
+if(isset ($_GET["buscar_cadena"]) or isset ($_GET["buscar_carnet"]))
     {
-    echo '<form action="index.php" method="get">
-    <input type="hidden" name="cuerpo" value="rejilla_pacientes.php" />
-    <br/><input class="boton" type="submit" name="Cancelar" value="Cancelar"/>
-    </form><br/>';
-    }
-else 
-    {
-    echo '<form action="index.php" method="get">
-    <br/>Buscar
-    <input type="text" name="cadena"/>
-    <input type="hidden" name="cuerpo" value="rejilla_pacientes.php" />
-    <input class="boton" type="submit" name="buscar_cadena" value="Buscar"/>
-    </form>
-    <form action="index.php" method="get">
-    <br/>Buscar Nº de carnet
-    <input type="text" name="carnet"/>
-    <input type="hidden" name="cuerpo" value="rejilla_pacientes.php" />
-    <input class="boton" type="submit" name="buscar_carnet" value="Buscar"/>
-    </form>        
-    <form action="index.php" method="get">
-    <input type="hidden" name="cuerpo" value="form_pacientes.php" />
-    <br/><input class="boton" type="submit" name="nuevo" value="Nuevo"/>
-    </form><br/><br/>';
-    } //Incluir en Generador  
+    echo '<div class="cancelar">
+            <form action="index.php" method="get">
+                <input type="hidden" name="cuerpo" value="rejilla_pacientes.php" />
+                <input class="boton" type="submit" name="Cancelar" value="Cancelar"/>
+            </form>
+        </div>';
+    }//Incluir en Generador  
 ?>    

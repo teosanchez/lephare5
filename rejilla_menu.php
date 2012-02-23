@@ -38,8 +38,18 @@ else
     }
 /******************** Fin establecer consulta *****************/
 
-echo '<h3>REJILLA MENU</h3><br/>';
+echo '<div class="titulo"><h3>MENU</h3></div>';
+?>
 
+<div class="buscar">
+    <form action="index.php" method="get">
+        <input type="text" name="cadena"/>
+        <input type="hidden" name="cuerpo" value="rejilla_menu.php" />
+        <input class="boton" type="submit" name="buscar_cadena" value="Buscar Datos"/>
+    </form>
+</div>   
+    
+<?php
 if($result)
     {       
     $rejilla=new rejilla($result,"index.php?cuerpo=form_menu.php&","id","Texto");
@@ -47,14 +57,11 @@ if($result)
     if ($result2<>"")
         {       /* Incluir  en generador este if */        
         $num_registros= count($result2);
-        if ($num_registros == 1)
-            {
-            echo '<br/>Se ha encontrado '.$num_registros.' registro.';
-            }
-        else
-            {
-            echo '<br/>Se han encontrado '.$num_registros.' registros.';
-            }
+        if ($num_registros == 1) {
+            echo '<p class="num_registros">Se ha encontrado ' . $num_registros . ' registro.</p>';
+        } else {
+            echo '<p class="num_registros">Se han encontrado ' . $num_registros . ' registros.</p>';
+        }
         }
     }
 else
@@ -66,19 +73,25 @@ else
         }
     else
         {
-        echo '<p class="error">No se ha encontrado ning�n registro.</p>';
+        echo '<p class="error">No se ha encontrado ningun registro.</p>';
         $num_registros='';
         }    
     }
+if (isset($_GET['msj']) && $_GET['msj'] != "") {
+    echo '<p class="error">Error: ' . $_GET['msj'] . '</p>';
+}
+if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador                                           
+    echo '<p clase="mensaje">' . $_GET['msj2'] . '</p>';            //Incluir en Generador
+}  
+?>
+<div class="nuevo">
+    <form action="index.php" method="get">
+        <input type="hidden" name="cuerpo" value="form_menu.php" />
+        <input class="boton" type="submit" name="nuevo" value="Nuevo"/>
+    </form>
+</div>    
 
-if(isset ($_GET['msj'])&& $_GET['msj']!="")
-    {
-    echo '<p>Error: '.$_GET['msj'].'</p>';
-    }
-if(isset ($_GET['msj2'])&& $_GET['msj2']!="")
-    {  //Incluir en Generador                                               
-    echo '<p>'.$_GET['msj2'].'</p>';            //Incluir en Generador
-    }
+<?php
 /*********** Paginacion ***************/
 if($num_registros>10)
     {
@@ -91,25 +104,16 @@ if($num_registros>10)
     }
 if($num_registros==0)
     {
-    echo "No se ha encontrado ningun registro.";
-    }  
- /*********** Fin Paginacion ***************/      
+    echo "<p clase='mensaje'>No se ha encontrado ningun registro.</p>";
+    } 
+ /*********** Fin Paginacion ***************/
+if(isset($_GET["buscar_cadena"]))
+    {
+    echo '<div class="cancelar">
+            <form action="index.php" method="get">
+                <input type="hidden" name="cuerpo" value="rejilla_menu.php" />
+                <input class="boton" type="submit" name="Cancelar" value="Cancelar"/>
+            </form>
+        </div>';
+    }    
 ?>
-
-
-<form action="index.php" method="get">
-<input type="hidden" name="cuerpo" value="rejilla_menu.php" />
-<br/><input class="boton" type="submit" name="Cancelar" value="Cancelar"/>
-</form><br/>
-
-<form action="index.php" method="get">
-<br/>Buscar
-<input type="text" name="cadena"/>
-<input type="hidden" name="cuerpo" value="rejilla_menu.php" />
-<input class="boton" type="submit" name="buscar_cadena" value="Buscar"/>
-</form>
-
-<form action="index.php" method="get">
-<input type="hidden" name="cuerpo" value="form_menu.php" />
-<br/><input class="boton" type="submit" name="nuevo" value="Nuevo"/>
-</form><br/><br/>
