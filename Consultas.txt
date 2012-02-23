@@ -47,7 +47,7 @@ ON vw_edad_paciente_visita_id_enfermedad.id_enfermedad = t_enfermedades.id
 
 create view vw_edad_paciente_num_mes_visita_enfermedad as
 select  Enfermedad,
-        year(`Fecha Visita`) as Anno,        
+        year(`Fecha Visita`) as anio,        
         month(`Fecha Visita`) as Mes,
         Sexo,
         sum(if(edad<=1, 1, 0)) as 0_1, 
@@ -55,14 +55,14 @@ select  Enfermedad,
         sum(if(edad>4 and edad<=14, 1, 0)) as 5_14,
         sum(if(edad>14, 1, 0)) as Resto
 from vw_edad_paciente_visita_enfermedad
-group by enfermedad, sexo, Anno, Mes
-order by Anno, Mes, Enfermedad, Sexo
+group by enfermedad, sexo, anio, Mes
+order by anio, Mes, Enfermedad, Sexo
 
 
 
 create view vw_edad_paciente_nom_mes_visita_enfermedad as
 select Enfermedad,
-        Anno as `Año`,
+        anio as `anio`,
         t_meses.nom_mes as `Mes`,
         Sexo,
         0_1 as `0a1`,
