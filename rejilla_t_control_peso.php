@@ -33,7 +33,7 @@ if (isset($_GET["id_nutricion"])) {
     $id_nutricion = "";
 }
 if ($result) {
-    echo '<p><h1>Contro de peso<br></h1></p>';
+    echo '<p><h1>Control de peso<br></h1></p>';
     echo "Paciente: " . $paciente;
     $rejilla = new rejilla($result, "index.php?cuerpo=form_t_control_peso.php&paciente=" . $paciente . "&", "id", "fecha");
     echo $rejilla->pintar();
