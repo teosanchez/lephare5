@@ -2,13 +2,13 @@
 include_once ("clase_bd.php");
 $bd=new bd();
 
-if (isset ($_GET["Años"]))
+if (isset ($_GET["anios"]))
     {
-        $anno = $_GET["Años"];
+        $anio = $_GET["anios"];
     }
 else
     {
-        $anno=date("Y");
+        $anio=date("Y");
     }
 if (isset ($_GET["Meses"]))
     {
@@ -20,13 +20,13 @@ else
    }
 if(isset($_GET["est_mensuales"])) 
 {
-    header('Location: index.php?cuerpo=rejilla_est_edades_mensuales.php&Años='.$anno.
+    header('Location: index.php?cuerpo=rejilla_est_edades_mensuales.php&anios='.$anio.
             "&Meses=".$indice_mes);//Incluir en Generador
 }
 
 if(isset($_GET["est_anuales"])) 
 {
-    header('Location: index.php?cuerpo=rejilla_est_edades_anuales.php&Años='.$anno.
+    header('Location: index.php?cuerpo=rejilla_est_edades_anuales.php&anios='.$anio.
             "&Meses=".$indice_mes);//Incluir en Generador
 }
 ?>

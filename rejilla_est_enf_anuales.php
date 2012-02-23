@@ -7,18 +7,18 @@ include ("clase_meses.php");
 
 $bd = new bd();
 $util = new utilidadesIU();
-$annos = new annos();
+$anios = new anios();
 $meses = new meses();
 
-/* * ********* Cálculo de $anno ************** */
+/* * ********* Cálculo de $anio ************** */
 
-if (isset($_GET["Años"])) {
-    $anno = $_GET["Años"];
+if (isset($_GET["anios"])) {
+    $anio = $_GET["anios"];
 } else {
-    $anno = date("Y");
+    $anio = date("Y");
 }
 
-/* * *********  Fin Cálculo de $anno  ************** */
+/* * *********  Fin Cálculo de $anio  ************** */
 
 /* * ********* Establecer consulta ************** */
 $cadena = "";
@@ -30,31 +30,31 @@ if (isset($_GET["cadena"]) && $_GET["cadena"] <> "") { //Evalua si existe esta v
                 from vw_total_consultas_por_enfermedad_y_edad
                 where Enfermedad like '%" . $cadena . "%'
                 or Mes like '%" . $cadena . "%'
-                and `Año`='" . $anno . "'");
+                and `anio`='" . $anio . "'");
     $result2 = $bd->consultar("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto
                 from vw_total_consultas_por_enfermedad_y_edad
                 where Enfermedad like '%" . $cadena . "%'
                 or Mes like '%" . $cadena . "%'
-                and `Año`='" . $anno . "'");
+                and `anio`='" . $anio . "'");
 } else {
     if (!isset($_GET["cadena"])) {
         $result = $bd->consultarArray("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto 
                 FROM vw_total_consultas_por_enfermedad_y_edad
-                WHERE `Año`='" . $anno . "'");
+                WHERE `anio`='" . $anio . "'");
         $result_total_edad = $bd->consultarArray("SELECT SUM( 0a1 ) AS 0a1, 
                 SUM( 2a4 ) AS 2a4, 
                 SUM( 5a14 ) AS 5a14, 
                 SUM( Resto ) AS Resto, 
                 SUM( Total ) AS Total
                 FROM vw_total_consultas_por_edad
-                WHERE `Año`='" . $anno . "'");
+                WHERE `anio`='" . $anio . "'");
     }
 }
 
 /* * ****************** Fin establecer consulta **************** */
 
 echo '<div class="titutlo"><h3>ESTADÍSTICAS ENFERMEDADES - ANUALES</h3></div>';
-echo '<div class="titutlo"><h2>' . "AÑO " . $anno . '</h2></div>';
+echo '<div class="titutlo"><h2>' . "Año " . $anio . '</h2></div>';
 ?>
 
 <div class="buscar">
