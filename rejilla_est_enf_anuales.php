@@ -26,19 +26,19 @@ $result = "";
 $result2 = "";    /* Incluir en generador el cñlculo de $result2 */
 if (isset($_GET["cadena"]) && $_GET["cadena"] <> "") { //Evalua si existe esta variable y si viene con algun contenido, la cual procede del cuadro de texto que esta junto al boton Buscar de uno de los formularios
     $cadena = $_GET["cadena"];
-    $result = $bd->consultarArray("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto
+    $result = $bd->consultarArray("SELECT Enfermedad,Sexo,0a1,2a4,5a14,Resto
                 from vw_total_consultas_por_enfermedad_y_edad
                 where Enfermedad like '%" . $cadena . "%'
                 or Mes like '%" . $cadena . "%'
                 and `Año`='" . $anno . "'");
-    $result2 = $bd->consultar("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto
+    $result2 = $bd->consultar("SELECT Enfermedad,Sexo,0a1,2a4,5a14,Resto
                 from vw_total_consultas_por_enfermedad_y_edad
                 where Enfermedad like '%" . $cadena . "%'
                 or Mes like '%" . $cadena . "%'
                 and `Año`='" . $anno . "'");
 } else {
     if (!isset($_GET["cadena"])) {
-        $result = $bd->consultarArray("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto 
+        $result = $bd->consultarArray("SELECT Enfermedad,Sexo,0a1,2a4,5a14,Resto 
                 FROM vw_total_consultas_por_enfermedad_y_edad
                 WHERE `Año`='" . $anno . "'");
         $result_total_edad = $bd->consultarArray("SELECT SUM( 0a1 ) AS 0a1, 
