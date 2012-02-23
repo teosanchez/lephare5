@@ -7,18 +7,18 @@ include ("clase_meses.php");
 
 $bd = new bd();
 $util = new utilidadesIU();
-$annos = new annos();
+$anios = new anios();
 $meses = new meses();
 
-/* * ********* Cálculo de $anno  ************** */
+/* * ********* Cálculo de $anio  ************** */
 
-if (isset($_GET["Años"])) {
-    $anno = $_GET["Años"];
+if (isset($_GET["anios"])) {
+    $anio = $_GET["anios"];
 } else {
-    $anno = date("Y");
+    $anio = date("Y");
 }
 
-/* * *********  Fin Cálculo de $anno ************** */
+/* * *********  Fin Cálculo de $anio ************** */
 
 /* * ********* Establecer consulta ************** */
 $cadena = "";
@@ -30,27 +30,27 @@ if (isset($_GET["cadena"]) && $_GET["cadena"] <> "") { //Evalua si existe esta v
                 from vw_porc_total_consultas_por_enfermedad_y_edad
                 where Enfermedad like '%" . $cadena . "%'
                 or Mes like '%" . $cadena . "%'
-                and `Año`='" . $anno . "'");
+                and `anio`='" . $anio . "'");
     $result2 = $bd->consultar("SELECT Enfermedad,Sexo,`%0a1`,`%2a4`,`%5a14`,`%Resto`
                 from vw_porc_total_consultas_por_enfermedad_y_edad
                 where Enfermedad like '%" . $cadena . "%'
                 or Mes like '%" . $cadena . "%'
-                and `Año`='" . $anno . "'");
+                and `anio`='" . $anio . "'");
 } else {
     if (!isset($_GET["cadena"])) {
         $result = $bd->consultarArray("SELECT Enfermedad,Sexo,`%0a1`,`%2a4`,`%5a14`,`%Resto`  
                 FROM vw_porc_total_consultas_por_enfermedad_y_edad
-                WHERE `Año`='" . $anno . "'");
+                WHERE `anio`='" . $anio . "'");
         $result_total_edad = $bd->consultarArray("SELECT `%0a1`,`%2a4`,`%5a14`,`%Resto` 
                 FROM vw_porc_total_consultas_por_edad_anuales
-                WHERE `Año`='" . $anno . "'");
+                WHERE `anio`='" . $anio . "'");
     }
 }
 
 /* * ****************** Fin establecer consulta **************** */
 
 echo '<div class="titulo"><h3>ESTADÍSTICAS ENFERMEDADES - PORCENTAJES ANUALES</h3></div>';
-echo '<div class="titulo"><h2>' . "AÑO " . $anno . '</h2></div>';
+echo '<div class="titulo"><h2>' . "anio " . $anio . '</h2></div>';
 ?>
 
 <div class="buscar">

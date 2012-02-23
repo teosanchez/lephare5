@@ -25,6 +25,9 @@ if (isset($_GET["id_nutricion"])) {
     $id_nutricion = $_GET["id_nutricion"];
     $result = $bd->consultarArray("select * from t_control_peso WHERE id_nutricion='.$id_nutricion.' $pages->limit");
     $result2 = $bd->consultarArray("select * from t_control_peso WHERE id_nutricion='.$id_nutricion.'");
+    $num_registros = count($result2);
+    $pages->items_total=$num_registros;
+    $pages->paginate();
 } else {
     $result = $bd->consultarArray("select * from t_control_peso ORDER BY fecha asc  $pages->limit");
     $id_nutricion = "";

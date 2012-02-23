@@ -7,17 +7,17 @@ include ("clase_meses.php");
 
 $bd = new bd();
 $util = new utilidadesIU();
-$annos = new annos();
+$anios = new anios();
 $meses = new meses();
 
-/* * ********* Cálculo de $anno y $mes  ************** */
+/* * ********* Cálculo de $anio y $mes  ************** */
 
 $nom_meses = $bd->consultarArray("select nom_mes from t_meses");
 
-if (isset($_GET["Años"])) {
-    $anno = $_GET["Años"];
+if (isset($_GET["anios"])) {
+    $anio = $_GET["anios"];
 } else {
-    $anno = date("Y");
+    $anio = date("Y");
 }
 if (isset($_GET["Meses"])) {
     $indice_mes = $_GET["Meses"] - 1;
@@ -26,24 +26,24 @@ if (isset($_GET["Meses"])) {
 }
 $mes = $nom_meses[$indice_mes]['nom_mes'];
 $id_mes = $indice_mes + 1;
-/* * *********  Fin Cálculo de $anno y $mes  ************** */
+/* * *********  Fin Cálculo de $anio y $mes  ************** */
 
 /* * ********* Establecer consulta ************** */
 $consulta = "SELECT Sexo,0a1,2a4,5a14,Resto,Total 
         FROM vw_total_consultantes_nuevos_mensuales
-        WHERE `Año`='" . $anno . "' and Mes='" . $id_mes . "'";
+        WHERE `anio`='" . $anio . "' and Mes='" . $id_mes . "'";
 //var_dump($consulta);
 $result_total_pacientes_nuevos = $bd->consultarArray($consulta);
 
 $consulta = "SELECT Sexo,0a1,2a4,5a14,Resto,Total
         FROM vw_total_consultantes_viejos_mensuales
-        WHERE `Año`='" . $anno . "' and Mes='" . $id_mes . "'";
+        WHERE `anio`='" . $anio . "' and Mes='" . $id_mes . "'";
 //var_dump($consulta);
 $result_total_pacientes_viejos = $bd->consultarArray($consulta);
 
 $consulta = "SELECT Sexo,0a1,2a4,5a14,Resto,Total
         FROM vw_total_consultantes_mensuales
-        WHERE `Año`='" . $anno . "' and Mes='" . $id_mes . "'";
+        WHERE `anio`='" . $anio . "' and Mes='" . $id_mes . "'";
 //var_dump($consulta);
 $result_total_pacientes = $bd->consultarArray($consulta);
 
@@ -52,7 +52,7 @@ $result_total_pacientes = $bd->consultarArray($consulta);
 /* * ****************** Fin establecer consulta **************** */
 
 echo '<div class="titulo"><h3>ESTADÍSTICAS PACIENTES NUEVOS/VIEJOS - MENSUALES</h3></div>';
-echo '<div class="titulo"><h2>' . $mes . " " . $anno . '</h2></div>';
+echo '<div class="titulo"><h2>' . $mes . " " . $anio . '</h2></div>';
 
 echo '<h2>Total de pacientes nuevos, clasificados por sexo y edad</h2>';
 if ($result_total_pacientes_nuevos) {

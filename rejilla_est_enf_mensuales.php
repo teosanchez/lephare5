@@ -7,17 +7,17 @@ include ("clase_meses.php");
 
 $bd = new bd();
 $util = new utilidadesIU();
-$annos = new annos();
+$anios = new anios();
 $meses = new meses();
 
-/* * ********* Cálculo de $anno y $mes  ************** */
+/* * ********* Cálculo de $anio y $mes  ************** */
 
 $nom_meses = $bd->consultarArray("select nom_mes from t_meses");
 
-if (isset($_GET["Años"])) {
-    $anno = $_GET["Años"];
+if (isset($_GET["anios"])) {
+    $anio = $_GET["anios"];
 } else {
-    $anno = date("Y");
+    $anio = date("Y");
 }
 if (isset($_GET["Meses"])) {
     $indice_mes = $_GET["Meses"] - 1;
@@ -26,7 +26,7 @@ if (isset($_GET["Meses"])) {
 }
 $mes = $nom_meses[$indice_mes]['nom_mes'];
 $id_mes = $indice_mes + 1;
-/* * *********  Fin Cálculo de $anno y $mes  ************** */
+/* * *********  Fin Cálculo de $anio y $mes  ************** */
 
 /* * ********* Establecer consulta ************** */
 $cadena = "";
@@ -38,29 +38,29 @@ if (isset($_GET["cadena"]) && $_GET["cadena"] <> "") { //Evalua si existe esta v
                 from vw_total_consultas_por_enfermedad_y_edad
                 where Enfermedad like '%" . $cadena . "%'
                 or Mes like '%" . $cadena . "%'
-                and `Año`='" . $anno . "' 
+                and `anio`='" . $anio . "' 
                 and Mes = '" . $mes . "'");
     $result2 = $bd->consultar("SELECT Enfermedad,Sexo,0a1,2a4,5a14,Resto
                 from vw_total_consultas_por_enfermedad_y_edad
                 where Enfermedad like '%" . $cadena . "%'
                 or Mes like '%" . $cadena . "%'
-                and `Año`='" . $anno . "' 
+                and `anio`='" . $anio . "' 
                 and Mes = '" . $mes . "'");
 } else {
     if (!isset($_GET["cadena"])) {
         $result = $bd->consultarArray("SELECT Enfermedad,Sexo,0a1,2a4,5a14,Resto 
                 FROM vw_total_consultas_por_enfermedad_y_edad
-                WHERE `Año`='" . $anno . "' and Mes='" . $mes . "'");
+                WHERE `anio`='" . $anio . "' and Mes='" . $mes . "'");
         $result_total_edad = $bd->consultarArray("SELECT 0a1,2a4,5a14,Resto,Total 
                 FROM vw_total_consultas_por_edad
-                WHERE `Año`='" . $anno . "' and Mes='" . $mes . "'");
+                WHERE `anio`='" . $anio . "' and Mes='" . $mes . "'");
     }
 }
 
 /* * ****************** Fin establecer consulta **************** */
 
 echo '<div class="titulo"><h3>ESTADÍSTICAS ENFERMEDADES - MENSUALES</h3></div>';
-echo '<div class="titulo"><h2>' . $mes . " " . $anno . '</h2></div>';
+echo '<div class="titulo"><h2>' . $mes . " " . $anio . '</h2></div>';
 ?>
 
 <div class="buscar">
