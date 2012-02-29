@@ -23,6 +23,8 @@ if(isset($_GET["id"]))
 }
 ?>
 
+<h3><u>EDICIÓN CONTABILIDAD</u><br></h3>
+
 <form name="form_contabilidad" method="get" action="procesar_contabilidad.php">
 <input type="hidden" name="id" id="id" value="<?php echo $contabilidad->id; ?>"/>
 <table>
@@ -73,9 +75,9 @@ if(isset($_GET["id"]))
 </td>
 </tr>
 <tr>
-	<td><input type="submit" name="Enviar" value="Enviar"></td>
-	<td><input type="submit" name="Borrar" value="Borrar"></td>
-	<td><input type="submit" name="Cancelar" value="Cancelar"></td>
+	<td><input type="submit" name="Enviar" value="Aceptar"/></td>
+	<td><input type="submit" name="Borrar" value="Borrar"/></td>
+	<td><input type="submit" name="Cancelar" value="Cancelar"/></td>
         </tr>
      </table>
      </form>

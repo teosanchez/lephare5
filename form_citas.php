@@ -16,7 +16,7 @@ if(isset($_GET["id"]))
         }
     }
 ?>
-<h3><u>FORMULARIO CITAS</u><br></h3>
+<h3><u>EDICIÓN CITAS</u><br></h3>
 <form name="form_citas" method="get" action="procesar_citas.php">
     <input type="hidden" name="id" id="id" value="<?php echo $citas->id; ?>"/>
     <table>
@@ -57,9 +57,10 @@ if(isset($_GET["id"]))
             </td>
         </tr>
         <tr>
-            <td><input class="boton" type="submit" name="Enviar" value="Enviar"/><?php if(isset ($_GET["id"]) )
-                { echo '<input class="boton" type="submit" name="Borrar" value="Borrar"/>';} ?></td>
             <td><input class="boton" type="submit" name="Cancelar" value="Cancelar"/></td>
+            <?php if(isset ($_GET["id"]) )
+                { echo '<td><input class="boton" type="submit" name="Borrar" value="Borrar"/>';} ?></td>
+            <td><input class="boton" type="submit" name="Enviar" value="Aceptar"/></td>
         </tr>
     </table>
 </form>

@@ -33,7 +33,7 @@ class utilidadesIU {
 
         while($row = mysql_fetch_array($datos))
         {    
-                if($seleccion==$row['Año'])
+                if($seleccion==$row['anio'])
                 {
                     $selected=" selected ";
                 }
@@ -41,7 +41,7 @@ class utilidadesIU {
                 {
                     $selected='';
                 }
-                $salida.='<option  '.$selected.'value="'.$row['Año'].'">'.$row[$campoVisible].'</option>';
+                $salida.='<option  '.$selected.'value="'.$row['anio'].'">'.$row[$campoVisible].'</option>';
         }
         $salida.= "</select>";
         return $salida;

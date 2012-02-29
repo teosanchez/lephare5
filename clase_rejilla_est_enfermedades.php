@@ -10,7 +10,7 @@ class rejilla_est_enfermedades
         
     private function cabecera()
         {
-        $salida='<table id=\"detalle\"><tr>';
+        $salida='<table id="detalle"><tr>';
         $datos=$this->_datos;
 
         foreach($datos[0] as $indice=>$valor)

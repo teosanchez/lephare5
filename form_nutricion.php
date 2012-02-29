@@ -20,7 +20,7 @@ if(isset($_GET["id"]))
 
 
 ?>
-
+<h3><u>EDICIÓN NUTRICIÓN</u><br></h3>
 <form name="form_nutricion" method="get" action="procesar_nutricion.php">
 <input type="hidden" name="id" id="id" value="<?php echo $nutricion->id; ?>"/>
 <table>
@@ -93,12 +93,12 @@ if(isset($_GET["id"]))
 </td>
 </tr>
 <tr>
-	<td><input type="submit" name="Enviar" value="Enviar"></td>
+	<td><input type="submit" name="Enviar" value="Aceptar"/></td>
         <td><?php if(isset($_GET['id']))
             {
-                echo '<input type="submit" name="Borrar" value="Borrar">';
+                echo '<input type="submit" name="Borrar" value="Borrar"/>';
             }?>
-            <input type="submit" name="Cancelar" value="Cancelar"></td>
+            <input type="submit" name="Cancelar" value="Cancelar"/></td>
         </tr>
      </table>
      </form>
