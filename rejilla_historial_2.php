@@ -29,8 +29,8 @@ if(isset ($_GET["id_paciente"]))
         $result2=$bd->consultar("select * from vw_rejilla_historial where id_paciente='".$id_paciente."'");
     }    
 //-----------------Comienzo Rejilla--------------------------
-    echo '<h3>REJILLA HISTORIAL</h3><br/>';
-    echo "<h3>Historial de ".$_GET['nombre_paciente']."</h3><br/>";
+    echo '<div class="titulo"><h3>HISTORIAL</h3></div>';
+    echo '<div class="titulo"><h3>Historial de '.$_GET['nombre_paciente']."</h3></div>";
 
 if($result)
 {    

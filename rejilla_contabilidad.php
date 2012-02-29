@@ -5,7 +5,10 @@ include_once ("clase_bd.php");
 	$bd=new bd();
 	$result=$bd->consultarArray("select * from vw_rejilla_contabilidad");
 if($result)
-{echo '<p><h3>contabilidad<br></h3></p>';
+{   
+    echo '<div class="titulo">';
+    echo '<h3>CONTABILIDAD<br></h3>';
+    echo '</div>';
 	$rejilla=new rejilla($result,"index.php?cuerpo=form_contabilidad.php&","id","Fecha");
 	echo $rejilla->pintar();
 }

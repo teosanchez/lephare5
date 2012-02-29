@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
         <link rel="stylesheet" type="text/css" href="css/960.css"/>
         <link rel="stylesheet" type="text/css" href="estilos.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:900' rel='stylesheet' type='text/css'>
         <title>LePhare</title>
     </head>
     <body>

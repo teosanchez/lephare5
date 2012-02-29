@@ -5,7 +5,10 @@ include_once ("clase_bd.php");
 	$bd=new bd();
 	$result=$bd->consultarArray("select id, nombre AS Nombre from t_conceptos");
 if($result)
-{echo '<p><h3>conceptos<br></h3></p>';
+{
+    echo '<div class="titulo">';
+    echo '<h3>CONCEPTOS<br></h3>';
+    echo '</div>';
 	$rejilla=new rejilla($result,"index.php?cuerpo=form_t_conceptos.php&","id","Nombre");
 	echo $rejilla->pintar();
 }

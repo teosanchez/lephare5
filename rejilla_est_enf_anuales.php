@@ -5,117 +5,102 @@ include_once ("clase_bd.php");
 include ("clase_annos.php");
 include ("clase_meses.php");
 
-$bd=new bd();
-$util=new utilidadesIU();
-$annos=new annos();
-$meses=new meses();
+$bd = new bd();
+$util = new utilidadesIU();
+$annos = new annos();
+$meses = new meses();
 
-/*********** Cálculo de $anno ***************/
+/* * ********* Cálculo de $anno ************** */
 
-if (isset ($_GET["Años"]))
-    {
-        $anno = $_GET["Años"];
-    }
-else
-    {
-        $anno=date("Y");
-    }
-    
-/***********  Fin Cálculo de $anno  ***************/
-
-/*********** Establecer consulta ***************/
-$cadena="";
-$result="";
-$result2="";    /* Incluir en generador el cñlculo de $result2 */
-if(isset ($_GET["cadena"]) && $_GET["cadena"]<>"") //Evalua si existe esta variable y si viene con algun contenido, la cual procede del cuadro de texto que esta junto al boton Buscar de uno de los formularios
-{
-    $cadena=$_GET["cadena"];
-    $result=$bd->consultarArray("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto
-                from vw_total_consultas_por_enfermedad_y_edad
-                where Enfermedad like '%".$cadena."%'
-                or Mes like '%".$cadena."%'
-                and `Año`='".$anno."'");
-    $result2=$bd->consultar("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto
-                from vw_total_consultas_por_enfermedad_y_edad
-                where Enfermedad like '%".$cadena."%'
-                or Mes like '%".$cadena."%'
-                and `Año`='".$anno."'");
+if (isset($_GET["Años"])) {
+    $anno = $_GET["Años"];
+} else {
+    $anno = date("Y");
 }
-else    
-{
-    if(!isset ($_GET["cadena"]))
-    {      
-        $result=$bd->consultarArray("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto 
+
+/* * *********  Fin Cálculo de $anno  ************** */
+
+/* * ********* Establecer consulta ************** */
+$cadena = "";
+$result = "";
+$result2 = "";    /* Incluir en generador el cñlculo de $result2 */
+if (isset($_GET["cadena"]) && $_GET["cadena"] <> "") { //Evalua si existe esta variable y si viene con algun contenido, la cual procede del cuadro de texto que esta junto al boton Buscar de uno de los formularios
+    $cadena = $_GET["cadena"];
+    $result = $bd->consultarArray("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto
+                from vw_total_consultas_por_enfermedad_y_edad
+                where Enfermedad like '%" . $cadena . "%'
+                or Mes like '%" . $cadena . "%'
+                and `Año`='" . $anno . "'");
+    $result2 = $bd->consultar("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto
+                from vw_total_consultas_por_enfermedad_y_edad
+                where Enfermedad like '%" . $cadena . "%'
+                or Mes like '%" . $cadena . "%'
+                and `Año`='" . $anno . "'");
+} else {
+    if (!isset($_GET["cadena"])) {
+        $result = $bd->consultarArray("SELECT Mes,Enfermedad,Sexo,0a1,2a4,5a14,Resto 
                 FROM vw_total_consultas_por_enfermedad_y_edad
-                WHERE `Año`='".$anno."'");
-        $result_total_edad=$bd->consultarArray("SELECT SUM( 0a1 ) AS 0a1, 
+                WHERE `Año`='" . $anno . "'");
+        $result_total_edad = $bd->consultarArray("SELECT SUM( 0a1 ) AS 0a1, 
                 SUM( 2a4 ) AS 2a4, 
                 SUM( 5a14 ) AS 5a14, 
                 SUM( Resto ) AS Resto, 
                 SUM( Total ) AS Total
                 FROM vw_total_consultas_por_edad
-                WHERE `Año`='".$anno."'");
-     }
+                WHERE `Año`='" . $anno . "'");
+    }
 }
 
-/******************** Fin establecer consulta *****************/
+/* * ****************** Fin establecer consulta **************** */
 
-echo '<h3>ESTADÍSTICAS ENFERMEDADES - ANUALES</h3><br/>';
-echo '<h2>'."AÑO ".$anno.'</h2>';
+echo '<div class="titulo"><h3>ESTADÍSTICAS ENFERMEDADES - ANUALES</h3></div>';
+echo '<div class="titulo"><h2>' . "AÑO " . $anno . '</h2></div>';
+?>
 
-if($result)
-{
-    $rejilla=new rejilla_est_enfermedades($result);
+<div class="buscar">
+    <form action="index.php" method="get">
+        <input type="hidden" name="cuerpo" value="criterios_est_enf.php"/>
+        <input type="text" name="cadena"/>
+        <input class="boton" type="submit" name="buscar" value="Buscar"/>
+    </form>
+</div>
+
+<?php
+if ($result) {
+    $rejilla = new rejilla_est_enfermedades($result);
     echo $rejilla->pintar();
 
-    if ($result2<>"")       /* Incluir  en generador este if */
-    {
-        $num_registros= mysql_num_rows($result2);
-        if ($num_registros == 1)
-        {
-            echo '<p>Se ha encontrado '.$num_registros.' registro.</p>';
-        }
-        else
-        {
-            echo '<p>Se han encontrado '.$num_registros.' registros.</p>';
+    if ($result2 <> "") /* Incluir  en generador este if */ {
+        $num_registros = mysql_num_rows($result2);
+        if ($num_registros == 1) {
+            echo '<p>Se ha encontrado ' . $num_registros . ' registro.</p>';
+        } else {
+            echo '<p>Se han encontrado ' . $num_registros . ' registros.</p>';
         }
     }
     echo '<h2>Total de enfermedades anuales, clasificadas por edad</h2>';
-    $rejilla_total_edad=new rejilla_est_enfermedades($result_total_edad);
+    $rejilla_total_edad = new rejilla_est_enfermedades($result_total_edad);
     echo $rejilla_total_edad->pintar();
-}
-else	/* Incluir en generador este else */
-{
-    if (isset($_GET["buscar_cadena"]) && $cadena=="")
-    {
+} else /* Incluir en generador este else */ {
+    if (isset($_GET["buscar_cadena"]) && $cadena == "") {
         echo '<p class="error">Introduzca el dato que desea buscar.</p>';
-    }
-    else
-    {
+    } else {
         echo '<p class="error">No se ha encontrado ningñn registro.</p>';
     }
 }
 
-if(isset ($_GET['msj'])&& $_GET['msj']!="")
-{
-    echo '<p>Error: '.$_GET['msj'].'</p>';
+if (isset($_GET['msj']) && $_GET['msj'] != "") {
+    echo '<p>Error: ' . $_GET['msj'] . '</p>';
 }
-    
-if(isset ($_GET['msj2'])&& $_GET['msj2']!="")//Incluir en Generador
-{                                            //Incluir en Generador   
-    echo '<p>'.$_GET['msj2'].'</p>';             //Incluir en Generador   
-} //Incluir en Generador 
 
+if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador                                            //Incluir en Generador   
+    echo '<p>' . $_GET['msj2'] . '</p>';             //Incluir en Generador   
+} //Incluir en Generador 
 ?>
 
-<form action="index.php" method="get">
-    <input type="hidden" name="cuerpo" value="criterios_est_enf.php"/>
-    <input type="text" name="cadena"/>
-    <input class="boton" type="submit" name="buscar" value="Buscar"/>
-</form>
-</br>
-
-<form action="index.php" method="get">
-    <input type="hidden" name="cuerpo" value="criterios_est_enf.php"/>
-    <input class="boton" type="submit" name="volver" value="Volver"/>
-</form>
+<div class="nuevo">
+    <form action="index.php" method="get">
+        <input type="hidden" name="cuerpo" value="criterios_est_enf.php"/>
+        <input class="boton" type="submit" name="volver" value="Volver"/>
+    </form>
+</div>

@@ -1,17 +1,18 @@
 /* CSS Document*/
 body {color:#FFF;
-      background-image: url('imagenes/fondo_degradado2.png');
-      background-repeat: repeat-x;
+      background-image: url('imagenes/glossymetal.jpg');
+      background-repeat: repeat-x,y;
       font-family: arial, verdana;
       font-size: 12px;
       text-align: justify;}
 /*Cabecera de Pagina*/
 #contenedor1 {
     background-color:#FFFFFF;
+    
 }
 #cabecera{
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;   
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;  
 }
 
 #contenedor2 {
@@ -49,16 +50,10 @@ li a:hover {
 /* Cuerpo*/
 #cuerpo {
     color:black;
-    font-weight: bold;
+    font-weight: normal;
 }        
 /* Rejilla*/            
-h3 {
-    text-align: center;
-    font-family: arial, verdana;
-    font-size: 18px;
-    color:black;
-    
-}
+
 table{
     margin: auto;
     width: 90%;
@@ -73,7 +68,7 @@ table{
 tr:nth-child(2n+1){background-color:#F0F0F0; color:#000;}        
 th {
     font-size: 14px;
-    font-weight:bold;
+    font-weight:bolder;
     color:black;
     background-color:#D3D3D3;
 }
@@ -82,13 +77,15 @@ a {
     font-family: arial, verdana;
     color:#353535;
     text-decoration: none;
+    font-weight:bold;
+   
 }
 a:hover {
     font-weight:bold;
-    color: red;
+    color: #0000FF;
 }            
 .visitado {
-    background-color:#010245;
+    background-color:#3ADF00;
     color:#FFFFFF;
 }                    
 /* Cuadros de texto y desplegables */ 
@@ -99,17 +96,29 @@ input,select{
     background-color:#F0F0F0;
     color:#353535;
 }
-/* Botones    
+
+
+/* botones formulario */
+ 
 .boton {
-    background-color:silver;
-    font-family: arial, verdana;
-    font-weight:bold;
-    color:#F00202;
-    border-radius:10px;
-    border:solid black 1px;
+   border: none;
+   background: url('imagenes/down1.png') repeat-x;
+   padding-right: auto;
+   padding-left: auto;
+   padding-top: 5px;
+   padding-bottom: 5px;
     
 }
-*/ 
+.boton:hover{
+    border: none;
+    background: url('imagenes/up.png') repeat-x;
+  
+   padding-right: auto;
+   padding-left: auto;
+   padding-top: 5px;
+   padding-bottom: 5px;
+}
+
 /* Pie de Pagina */
 #contenedor3 {
     
@@ -118,6 +127,7 @@ input,select{
     background-color:darkgrey;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
+    border-top: 2px solid #6E6E6E;
      
 }
 
@@ -138,3 +148,12 @@ input,select{
     padding-left: auto; }
 
 
+.titulo{
+     text-align: center;
+    font-family: 'Merriweather', serif;
+    font-size: 18px;
+    color:black;
+    }
+    #titulo_pie{
+       font-family: 'Merriweather', serif;
+    }   

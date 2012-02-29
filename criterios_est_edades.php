@@ -35,9 +35,10 @@ $id_mes=$indice_mes+1;
 /***********  Fin Cálculo de $anno y $mes  ***************/
 
 ?>
+<div class="titulo">
+<h3>ESTADÍSTICAS PACIENTES NUEVOS/VIEJOS <br/> CRITERIOS DE SELECCIÓN</h3>
+</div>
 
-<h3>ESTADÍSTICAS PACIENTES NUEVOS/VIEJOS - CRITERIOS DE SELECCIÓN</h3>
-</br></br></br></br></br></br>
 <form action="index.php" method="get">
     <input type="hidden" name="cuerpo" value="procesar_est_edades.php"/>
     Seleccione un Mes:
@@ -47,7 +48,7 @@ $id_mes=$indice_mes+1;
     ?>
         Seleccione un Año:
     <?php
-        $datosLista=$bd->consultar("select * from vw_lista_annos");
+        $datosLista=$bd->consultar("select * from vw_lista_anios");
         echo $util->pinta_selection2($datosLista,"Años","Año",$anno);
     ?>
     </br></br></br>

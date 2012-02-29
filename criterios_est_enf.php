@@ -1,7 +1,7 @@
 <?php
 include ("utilidadesIU.php");
 include_once ("clase_bd.php");
-include ("clase_annos.php");
+include ("clase_anios.php");
 include ("clase_meses.php");
 
 $bd=new bd();
@@ -12,9 +12,9 @@ $meses=new meses();
 
 $nom_meses=$bd->consultarArray("select nom_mes from t_meses");
 
-if (isset ($_GET["Años"]))
+if (isset ($_GET["Anios"]))
     {
-        $anno = $_GET["Años"];
+        $anno = $_GET["Anios"];
     }
 else
     {
@@ -35,8 +35,9 @@ $id_mes=$indice_mes+1;
 /***********  Fin Cálculo de $anno y $mes  ***************/
 
 ?>
-
+<div class="titulo">
 <h3>ESTADÍSTICAS ENFERMEDADES - CRITERIOS DE SELECCIÓN</h3>
+</div>
 </br></br></br></br></br></br>
 <form action="index.php" method="get">
     <input type="hidden" name="cuerpo" value="procesar_est_enf.php"/>
@@ -47,8 +48,8 @@ $id_mes=$indice_mes+1;
     ?>
         Seleccione un Año:
     <?php
-        $datosLista=$bd->consultar("select * from vw_lista_annos");
-        echo $util->pinta_selection2($datosLista,"Años","Año",$anno);
+        $datosLista=$bd->consultar("select * from vw_lista_anios");
+        echo $util->pinta_selection2($datosLista,"Anios","Anio",$anio);
     ?>
     </br></br></br>
 
