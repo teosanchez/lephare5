@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php
 include ("clase_rejilla_est_enfermedades.php");
 include ("utilidadesIU.php");
@@ -105,6 +106,8 @@ if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador        
         <input class="boton" type="submit" name="volver" value="Volver"/>
     </form>
 =======
+=======
+>>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
 <?php
 include ("clase_rejilla_est_enfermedades.php");
 include ("utilidadesIU.php");
@@ -215,5 +218,8 @@ if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador        
         <input type="hidden" name="cuerpo" value="criterios_est_enf.php"/>
         <input class="boton" type="submit" name="volver" value="Volver"/>
     </form>
+<<<<<<< HEAD
+>>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
+=======
 >>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
 </div>

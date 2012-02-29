@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,6 +31,8 @@
         </div>   
    </body>
 =======
+=======
+>>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
 <!DOCTYPE html>
 <html>
     <head>
@@ -59,5 +62,8 @@
             </div>            
         </div>   
    </body>
+<<<<<<< HEAD
+>>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
+=======
 >>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
 </html>

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php
 include ("clase_rejilla.php");
 include_once ("clase_bd.php");
@@ -116,6 +117,8 @@ if($num_registros==0)
 <br/><input class="boton" type="submit" name="nuevo" value="Nuevo"/>
 </form><br/><br/>
 =======
+=======
+>>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
 <?php
 include ("clase_rejilla.php");
 include_once ("clase_bd.php");
@@ -234,5 +237,9 @@ if(isset($_GET["buscar_cadena"]))
             </form>
         </div>';
     }    
+<<<<<<< HEAD
+?>
+>>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
+=======
 ?>
 >>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba

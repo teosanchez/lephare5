@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php
 include ("clase_rejilla_pacientes.php");
 include_once ("clase_bd.php");
@@ -56,6 +57,8 @@ if (isset($_GET['msj2']) && $_GET['msj2'] != "") {//Incluir en Generador        
     </form>
 </div>
 =======
+=======
+>>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
 <?php
 include ("clase_rejilla_pacientes.php");
 include_once ("clase_bd.php");
@@ -200,5 +203,9 @@ if(isset ($_GET["buscar_cadena"]) or isset ($_GET["buscar_carnet"]))
             </form>
         </div>';
     }//Incluir en Generador  
+<<<<<<< HEAD
+?>    
+>>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
+=======
 ?>    
 >>>>>>> 38cb9c9840124788c2ea64d26e3cc657bdf136ba
